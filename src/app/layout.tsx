@@ -3,6 +3,7 @@ import { Inter, Syne } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
+import WhatsAppButton from "@/components/shared/WhatsAppButton";
 import { cn } from "@/lib/utils";
 
 const inter = Inter({
@@ -16,8 +17,8 @@ const syne = Syne({
 });
 
 export const metadata: Metadata = {
-  title: "LuxeDrive | Premium Luxury Car Marketplace",
-  description: "Experience automotive excellence with LuxeDrive. The world's leading marketplace for luxury and premium cars.",
+  title: "LuxDrive | Premium Luxury Car Marketplace",
+  description: "Experience automotive excellence with LuxDrive. The world's leading marketplace for luxury and premium cars.",
 };
 
 export default function RootLayout({
@@ -33,6 +34,7 @@ export default function RootLayout({
           {children}
         </main>
         <Footer />
+        <WhatsAppButton />
       </body>
     </html>
   );

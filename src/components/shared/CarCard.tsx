@@ -3,84 +3,86 @@
 import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { Heart, Fuel, Gauge, Settings, ShieldCheck, ArrowUpRight } from "lucide-react";
-import { cn, formatCurrency, formatKm } from "@/lib/utils";
+import { Heart, ShieldCheck } from "lucide-react";
+import { cn, formatCurrency } from "@/lib/utils";
 import { Car } from "@/lib/mock-data";
-import { Button } from "@/components/ui/Button";
 
 interface CarCardProps {
   car: Car;
+  viewMode?: "grid" | "list";
 }
 
-const CarCard = ({ car }: CarCardProps) => {
+const formatLakhs = (amount: number) => {
+  return `₹${(amount / 100000).toFixed(2)} lakh`;
+};
+
+const formatL = (amount: number) => {
+  return `₹${(amount / 100000).toFixed(2)}L`;
+};
+
+const CarCard = ({ car, viewMode = "grid" }: CarCardProps) => {
+  const isList = viewMode === "list";
+
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
-      className="group bg-white rounded-3xl border border-border overflow-hidden hover-lift flex flex-col h-full"
+      className={cn(
+        "group bg-white rounded-2xl border border-gray-200 overflow-hidden hover:shadow-xl transition-shadow flex h-full",
+        isList ? "flex-col sm:flex-row w-full" : "flex-col"
+      )}
     >
       {/* Image Container */}
-      <div className="relative h-64 overflow-hidden">
+      <div className={cn("relative overflow-hidden shrink-0 bg-gray-100", isList ? "h-64 sm:h-auto sm:w-80" : "h-56")}>
         <Image
           src={car.image}
           alt={`${car.brand} ${car.model}`}
           fill
-          className="object-cover transition-transform duration-700 group-hover:scale-110"
+          className="object-cover group-hover:scale-105 transition-transform duration-500"
         />
-        <div className="absolute top-4 left-4">
-          <span className="glass px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider text-primary flex items-center gap-1.5 shadow-sm">
-            <ShieldCheck className="w-3 h-3 text-accent" />
-            Luxe Verified
-          </span>
-        </div>
-        <button className="absolute top-4 right-4 p-2.5 glass rounded-full hover:bg-white transition-colors group/heart">
-          <Heart className="w-4 h-4 text-primary group-hover/heart:fill-red-500 group-hover/heart:text-red-500 transition-all" />
+        <button className="absolute top-3 right-3 p-2 bg-white/80 backdrop-blur rounded-full hover:bg-white transition-colors group/heart">
+          <Heart className="w-5 h-5 text-gray-500 group-hover/heart:fill-red-500 group-hover/heart:text-red-500 transition-all" />
         </button>
-        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-6">
-          <Link href={`/buy-cars/${car.id}`} className="w-full">
-            <Button variant="accent" className="w-full rounded-xl">
-              View Details
-            </Button>
-          </Link>
-        </div>
       </div>
 
       {/* Content */}
-      <div className="p-6 flex flex-col flex-grow">
-        <div className="flex justify-between items-start mb-2">
-          <div>
-            <p className="text-xs font-bold text-accent uppercase tracking-widest mb-1">{car.brand}</p>
-            <h3 className="text-xl font-bold text-primary group-hover:text-accent transition-colors truncate max-w-[200px]">
-              {car.model}
+      <div className={cn("flex flex-col flex-grow relative", isList ? "p-6" : "p-5")}>
+        {/* LuxDrive Owned Stock Badge */}
+        {car.isOwnedStock && (
+          <div className="flex items-center gap-1.5 bg-blue-50 w-fit px-2 py-0.5 rounded text-[11px] font-bold text-blue-700 mb-3 -mt-2 shadow-sm border border-blue-100">
+            <ShieldCheck className="w-3.5 h-3.5 fill-blue-700 text-white" />
+            LuxDrive Owned Stock
+          </div>
+        )}
+
+        <div className="mb-4">
+          <Link href={`/buy-cars/${car.id}`} className="hover:underline">
+            <h3 className="text-lg font-bold text-gray-900 leading-tight">
+              {car.year} {car.brand} {car.model} <span className="text-sm font-semibold text-gray-500 ml-1 uppercase">{car.variant}</span>
             </h3>
-          </div>
-          <p className="text-sm font-bold text-muted-foreground">{car.year}</p>
+          </Link>
         </div>
 
-        <div className="grid grid-cols-3 gap-2 my-6">
-          <div className="flex flex-col items-center gap-1.5 p-2 bg-secondary rounded-2xl">
-            <Gauge className="w-4 h-4 text-muted" />
-            <span className="text-[10px] font-medium text-muted truncate w-full text-center">{formatKm(car.kilometers)}</span>
-          </div>
-          <div className="flex flex-col items-center gap-1.5 p-2 bg-secondary rounded-2xl">
-            <Fuel className="w-4 h-4 text-muted" />
-            <span className="text-[10px] font-medium text-muted truncate w-full text-center">{car.fuelType}</span>
-          </div>
-          <div className="flex flex-col items-center gap-1.5 p-2 bg-secondary rounded-2xl">
-            <Settings className="w-4 h-4 text-muted" />
-            <span className="text-[10px] font-medium text-muted truncate w-full text-center">{car.transmission}</span>
-          </div>
+        {/* Spec Chips */}
+        <div className="flex flex-wrap gap-2 mb-6">
+          <span className="bg-gray-100 text-gray-600 px-2 py-1 rounded text-xs font-medium">{car.kilometers.toLocaleString('en-IN')} km</span>
+          <span className="bg-gray-100 text-gray-600 px-2 py-1 rounded text-xs font-medium">{car.fuelType}</span>
+          <span className="bg-gray-100 text-gray-600 px-2 py-1 rounded text-xs font-medium">{car.transmission}</span>
+          <span className="bg-gray-100 text-gray-600 px-2 py-1 rounded text-xs font-medium">{car.stateCode}</span>
         </div>
 
-        <div className="mt-auto pt-6 border-t border-border flex items-center justify-between">
+        {/* Pricing Layout */}
+        <div className="mt-auto pt-4 border-t border-dashed border-gray-200 flex items-end justify-between">
           <div>
-            <p className="text-xs text-muted font-medium mb-1">Starting from</p>
-            <p className="text-2xl font-black text-primary">{formatCurrency(car.price)}</p>
+            <p className="text-[13px] font-bold text-gray-900">EMI {formatCurrency(car.emi)}/m*</p>
           </div>
           <div className="text-right">
-            <p className="text-[10px] text-muted font-bold uppercase tracking-tighter">Est. EMI</p>
-            <p className="text-sm font-bold text-accent">{formatCurrency(car.emi)}/mo</p>
+            {car.originalPrice && (
+              <p className="text-xs text-gray-400 line-through font-medium mb-0.5">{formatL(car.originalPrice)}</p>
+            )}
+            <p className="text-lg font-black text-gray-900">{formatLakhs(car.price)}</p>
+            <p className="text-[10px] text-gray-400 mt-0.5">+ other charges</p>
           </div>
         </div>
       </div>

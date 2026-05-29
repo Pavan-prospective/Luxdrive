@@ -12,7 +12,7 @@ const AdminDashboard = () => {
       <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
         <div>
           <h1 className="text-3xl font-black text-primary mb-2">Admin Control Center</h1>
-          <p className="text-muted-foreground font-medium">Monitoring LuxeDrive's global operations and quality.</p>
+          <p className="text-muted-foreground font-medium">Monitoring LuxDrive's global operations and quality.</p>
         </div>
         <div className="flex gap-4">
            <Button variant="outline" className="rounded-2xl h-14 px-8 border-2 font-bold">Generate Report</Button>
