@@ -31,7 +31,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
             <div className="w-10 h-10 bg-white rounded-xl flex items-center justify-center">
               <span className="text-primary font-black text-2xl">L</span>
             </div>
-            <span className="text-2xl font-black text-white tracking-tight">LuxeDrive</span>
+            <span className="text-2xl font-black text-white tracking-tight">LuxDrive</span>
           </Link>
         </div>
 

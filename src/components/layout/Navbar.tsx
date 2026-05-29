@@ -44,7 +44,7 @@ const Navbar = () => {
             "text-2xl font-display font-black tracking-tight",
             isScrolled ? "text-primary" : "text-primary" 
           )}>
-            LuxeDrive
+            LuxDrive
           </span>
         </Link>
 

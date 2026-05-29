@@ -29,7 +29,7 @@ const WhyChooseUs = () => {
       <div className="container mx-auto px-6 md:px-12">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
           <div>
-            <h2 className="text-sm font-bold text-accent uppercase tracking-[0.3em] mb-4">The LuxeDrive Edge</h2>
+            <h2 className="text-sm font-bold text-accent uppercase tracking-[0.3em] mb-4">The LuxDrive Edge</h2>
             <h3 className="text-4xl md:text-5xl font-black text-primary leading-tight mb-8">
               Why Discerning Drivers <br /> Choose Our Platform
             </h3>

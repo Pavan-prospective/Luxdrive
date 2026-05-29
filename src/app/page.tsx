@@ -76,7 +76,7 @@ export default function Home() {
               <span className="text-accent italic">Driving Legacy?</span>
             </h2>
             <p className="text-xl text-gray-400 mb-12 leading-relaxed">
-              Whether you're looking to acquire your next masterpiece or find a new home for your current one, LuxeDrive provides a seamless, premium experience.
+              Whether you're looking to acquire your next masterpiece or find a new home for your current one, LuxDrive provides a seamless, premium experience.
             </p>
             <div className="flex flex-wrap gap-4">
               <Link href="/buy-cars">

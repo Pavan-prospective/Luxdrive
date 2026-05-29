@@ -11,7 +11,7 @@ const Footer = () => {
             <div className="w-8 h-8 bg-primary rounded-lg flex items-center justify-center">
               <span className="text-white font-bold text-lg">L</span>
             </div>
-            <span className="text-xl font-display font-black tracking-tight text-primary">LuxeDrive</span>
+            <span className="text-xl font-display font-black tracking-tight text-primary">LuxDrive</span>
           </Link>
           <div className="flex items-center gap-4 text-muted">
             <Link href="#" className="hover:text-accent transition-colors"><Globe className="w-4 h-4" /></Link>
@@ -32,9 +32,9 @@ const Footer = () => {
         {/* Contact & Copyright */}
         <div className="flex flex-col items-center md:items-end gap-2 text-xs font-medium text-muted/60">
           <div className="flex items-center gap-4">
-            <span className="flex items-center gap-1.5"><Mail className="w-3 h-3" /> concierge@luxedrive.com</span>
+            <span className="flex items-center gap-1.5"><Mail className="w-3 h-3" /> concierge@luxdrive.com</span>
           </div>
-          <p>© {new Date().getFullYear()} LuxeDrive Automotive. All rights reserved.</p>
+          <p>© {new Date().getFullYear()} LuxDrive Automotive. All rights reserved.</p>
         </div>
       </div>
     </footer>

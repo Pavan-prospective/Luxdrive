@@ -52,7 +52,7 @@ const CarDetailsPage = ({ params }: { params: Promise<{ id: string }> }) => {
                 <div className="absolute bottom-8 left-8">
                   <span className="glass px-4 py-2 rounded-full text-xs font-bold uppercase tracking-wider text-primary flex items-center gap-2">
                     <ShieldCheck className="w-4 h-4 text-accent" />
-                    LuxeDrive Certified
+                    LuxDrive Certified
                   </span>
                 </div>
               </div>
