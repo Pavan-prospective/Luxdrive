@@ -1,65 +1,98 @@
-import Image from "next/image";
+import Hero from "@/components/home/Hero";
+import Brands from "@/components/home/Brands";
+import WhyChooseUs from "@/components/home/WhyChooseUs";
+import CarCard from "@/components/shared/CarCard";
+import { MOCK_CARS } from "@/lib/mock-data";
+import { Button } from "@/components/ui/Button";
+import { ArrowRight } from "lucide-react";
+import Link from "next/link";
 
 export default function Home() {
+  const featuredCars = MOCK_CARS.slice(0, 3);
+  const premiumCars = MOCK_CARS.slice(0, 4);
+
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
+    <div className="flex flex-col w-full">
+      <Hero />
+      
+      {/* Featured Section */}
+      <section className="py-24 bg-white">
+        <div className="container mx-auto px-6 md:px-12">
+          <div className="flex flex-col md:flex-row justify-between items-end mb-12 gap-6">
+            <div>
+              <h2 className="text-sm font-bold text-accent uppercase tracking-[0.3em] mb-4">The Selection</h2>
+              <h3 className="text-4xl md:text-5xl font-display font-black text-primary tracking-tight">Featured Masterpieces</h3>
+            </div>
+            <Link href="/buy-cars">
+              <Button variant="ghost" className="group">
+                View All Collection
+                <ArrowRight className="ml-2 w-4 h-4 transition-transform group-hover:translate-x-1" />
+              </Button>
+            </Link>
+          </div>
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {featuredCars.map((car) => (
+              <CarCard key={car.id} car={car} />
+            ))}
+          </div>
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+      </section>
+
+      <Brands />
+      <WhyChooseUs />
+
+      {/* Mid-Range / Premium Section */}
+      <section className="py-24 bg-white">
+        <div className="container mx-auto px-6 md:px-12">
+          <div className="text-center mb-16">
+            <h2 className="text-sm font-bold text-accent uppercase tracking-[0.3em] mb-4">Premium Selection</h2>
+            <h3 className="text-4xl md:text-5xl font-display font-black text-primary tracking-tight">Exceptional Value, Elite Quality</h3>
+          </div>
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {premiumCars.map((car) => (
+              <CarCard key={car.id} car={car} />
+            ))}
+          </div>
+
+          <div className="mt-16 text-center">
+            <Link href="/buy-cars">
+              <Button size="lg" variant="outline" className="rounded-full px-12">
+                Browse Full Catalog
+              </Button>
+            </Link>
+          </div>
         </div>
-      </main>
+      </section>
+
+      {/* CTA Section */}
+      <section className="py-24 bg-primary relative overflow-hidden">
+        <div className="absolute top-0 right-0 w-1/2 h-full bg-accent/10 skew-x-12 translate-x-1/2" />
+        <div className="container mx-auto px-6 md:px-12 relative z-10">
+          <div className="max-w-3xl">
+            <h2 className="text-4xl md:text-6xl font-display font-black text-white mb-8 leading-tight tracking-tight">
+              Ready to Upgrade Your <br /> 
+              <span className="text-accent italic">Driving Legacy?</span>
+            </h2>
+            <p className="text-xl text-gray-400 mb-12 leading-relaxed">
+              Whether you're looking to acquire your next masterpiece or find a new home for your current one, LuxeDrive provides a seamless, premium experience.
+            </p>
+            <div className="flex flex-wrap gap-4">
+              <Link href="/buy-cars">
+                <Button size="lg" className="bg-white text-primary hover:bg-gray-100 rounded-full px-10">
+                  Buy a Luxury Car
+                </Button>
+              </Link>
+              <Link href="/sell-car">
+                <Button size="lg" variant="outline" className="border-white text-white hover:bg-white hover:text-primary rounded-full px-10">
+                  Sell Your Car
+                </Button>
+              </Link>
+            </div>
+          </div>
+        </div>
+      </section>
     </div>
   );
 }
