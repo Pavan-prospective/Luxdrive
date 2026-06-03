@@ -39,6 +39,7 @@ const CarCard = ({ car, viewMode = "grid" }: CarCardProps) => {
           src={car.image}
           alt={`${car.brand} ${car.model}`}
           fill
+          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
           className="object-cover group-hover:scale-105 transition-transform duration-500"
         />
         <button className="absolute top-3 right-3 p-2 bg-white/80 backdrop-blur rounded-full hover:bg-white transition-colors group/heart">

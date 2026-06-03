@@ -85,7 +85,7 @@ const BuyCarsPage = () => {
 
   return (
     <div className="min-h-screen bg-gray-50 pt-8 pb-32 font-sans">
-      <div className="container mx-auto px-4 md:px-6 max-w-[1400px]">
+      <div className="container mx-auto px-4 md:px-6 xl:px-12 2xl:px-24 max-w-[1920px] w-full">
         <div className="flex flex-col lg:flex-row gap-6">
           
           {/* Left Sidebar Filters */}
@@ -254,7 +254,7 @@ const BuyCarsPage = () => {
 
             {/* Grid */}
             {filteredCars.length > 0 ? (
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-6">
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 min-[1920px]:grid-cols-5 gap-6">
                 
                 {filteredCars.map((car, idx) => (
                   <div key={car.id} className="contents">

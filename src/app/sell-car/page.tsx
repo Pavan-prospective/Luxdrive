@@ -198,8 +198,8 @@ const SellCarPage = () => {
 
   return (
     <div className="min-h-screen bg-[#F8F9FA] pt-8 pb-24 font-sans">
-      <div className="container mx-auto px-4 max-w-6xl">
-        <div className="flex flex-col lg:grid lg:grid-cols-12 gap-6">
+      <div className="container mx-auto px-4 md:px-8 xl:px-16 2xl:px-24 max-w-[1920px] w-full">
+        <div className="flex flex-col lg:grid lg:grid-cols-12 gap-6 xl:gap-12">
           
           {/* Left Column: Main Stepper */}
           <div className="lg:col-span-3 bg-white rounded-3xl p-6 md:p-8 border border-gray-100 shadow-[0_4px_20px_-4px_rgba(0,0,0,0.05)] h-fit">
@@ -296,6 +296,7 @@ const SellCarPage = () => {
                   src="/images/car_keys.png" 
                   alt="Car keys exchange" 
                   fill
+                  sizes="(max-width: 768px) 100vw, 33vw"
                   className="object-cover"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-white via-white/40 to-transparent"></div>
