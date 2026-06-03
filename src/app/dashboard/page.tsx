@@ -1,10 +1,14 @@
+"use client";
+
 import { 
   Car, MessageSquare, TrendingUp, ShoppingBag, 
-  ArrowUpRight, Clock, ShieldCheck 
+  ArrowUpRight, ShieldCheck 
 } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import { MOCK_CARS } from "@/lib/mock-data";
 import { formatCurrency } from "@/lib/utils";
+import { useAuth } from "@/context/AuthContext";
+import Link from "next/link";
 
 const stats = [
   { label: "Active Listings", value: "04", icon: Car, trend: "+1 new" },
@@ -15,21 +19,31 @@ const stats = [
 
 const UserDashboard = () => {
   const recentListings = MOCK_CARS.slice(0, 2);
+  const { user } = useAuth();
+
+  const firstName = user?.full_name ? user.full_name.trim().split(/\s+/)[0] : "Alexander";
 
   return (
     <div className="space-y-12">
       <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
         <div>
-          <h1 className="text-3xl font-black text-primary mb-2">Welcome Back, Alexander</h1>
+          <h1 className="text-3xl font-black text-primary mb-2">Welcome Back, {firstName}</h1>
           <p className="text-muted-foreground font-medium">Your luxury automotive portfolio at a glance.</p>
         </div>
-        <Button variant="accent" className="rounded-2xl h-14 px-8 shadow-xl shadow-accent/20">
-          List New Car
-        </Button>
+        <div className="flex items-center gap-4">
+          <Link href="/seller-profile">
+            <Button variant="outline" className="rounded-2xl h-14 px-8 border-2 border-accent text-accent hover:bg-accent hover:text-white shadow-xl shadow-accent/10">
+              Become a Seller
+            </Button>
+          </Link>
+          <Button variant="accent" className="rounded-2xl h-14 px-8 shadow-xl shadow-accent/20">
+            List New Car
+          </Button>
+        </div>
       </div>
 
       {/* Stats Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 xl:gap-8">
         {stats.map((stat, idx) => (
           <div key={idx} className="bg-white p-8 rounded-[2.5rem] border border-border shadow-sm hover:shadow-xl transition-all group">
             <div className="flex items-center justify-between mb-6">
@@ -44,7 +58,7 @@ const UserDashboard = () => {
         ))}
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 xl:gap-12">
         {/* Active Listings */}
         <div className="lg:col-span-8 bg-white rounded-[3rem] border border-border shadow-sm overflow-hidden">
           <div className="p-10 border-b border-border flex items-center justify-between">

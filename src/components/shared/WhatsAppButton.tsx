@@ -2,9 +2,16 @@
 
 import React from "react";
 import Link from "next/link";
-import { MessageCircle } from "lucide-react";
+import { usePathname } from "next/navigation";
 
 const WhatsAppButton = () => {
+  const pathname = usePathname();
+
+  // Hide WhatsAppButton on authentication or dashboard paths
+  if (pathname?.startsWith("/auth") || pathname?.startsWith("/dashboard")) {
+    return null;
+  }
+
   // Using a dummy number since none was provided
   const whatsappNumber = "+1234567890";
   const message = encodeURIComponent("Hello! I am interested in buying/selling a car on LuxDrive.");

@@ -20,7 +20,7 @@ const CarDetailsPage = ({ params }: { params: Promise<{ id: string }> }) => {
   return (
     <div className="min-h-screen bg-white pb-24">
       {/* Breadcrumbs & Actions */}
-      <div className="container mx-auto px-6 md:px-12 py-8">
+      <div className="container mx-auto px-6 md:px-12 xl:px-16 2xl:px-24 max-w-[1920px] w-full py-8">
         <div className="flex flex-wrap items-center justify-between gap-4 mb-8">
           <Link href="/buy-cars" className="flex items-center gap-2 text-sm font-bold text-muted-foreground hover:text-primary transition-colors group">
             <ChevronLeft className="w-4 h-4 transition-transform group-hover:-translate-x-1" />
@@ -46,6 +46,7 @@ const CarDetailsPage = ({ params }: { params: Promise<{ id: string }> }) => {
                   src={car.image} 
                   alt={car.model} 
                   fill 
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 66vw, 50vw"
                   className="object-cover"
                   priority
                 />
@@ -59,7 +60,7 @@ const CarDetailsPage = ({ params }: { params: Promise<{ id: string }> }) => {
               <div className="grid grid-cols-4 gap-4">
                 {car.images.map((img, idx) => (
                   <div key={idx} className="relative aspect-video rounded-3xl overflow-hidden cursor-pointer hover:opacity-80 transition-opacity border-2 border-transparent hover:border-accent">
-                    <Image src={img} alt={`${car.model} view ${idx}`} fill className="object-cover" />
+                    <Image src={img} alt={`${car.model} view ${idx}`} fill sizes="(max-width: 768px) 50vw, 25vw" className="object-cover" />
                   </div>
                 ))}
                 <div className="relative aspect-video rounded-3xl overflow-hidden cursor-pointer bg-secondary flex items-center justify-center group">
@@ -247,8 +248,8 @@ const CarDetailsPage = ({ params }: { params: Promise<{ id: string }> }) => {
              <h3 className="text-3xl font-black">Similar Masterpieces</h3>
              <Link href="/buy-cars" className="text-sm font-bold text-accent hover:underline">View All</Link>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {MOCK_CARS.filter(c => c.id !== car.id).slice(0, 3).map(simCar => (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 min-[1920px]:grid-cols-5 gap-8">
+            {MOCK_CARS.filter(c => c.id !== car.id).slice(0, 5).map(simCar => (
               <CarCard key={simCar.id} car={simCar} />
             ))}
           </div>

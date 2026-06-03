@@ -1,10 +1,19 @@
+"use client";
+
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { Mail, Globe, MessageCircle, Share2 } from "lucide-react";
 
 const Footer = () => {
+  const pathname = usePathname();
+
+  // Hide Footer on authentication or dashboard paths
+  if (pathname?.startsWith("/auth") || pathname?.startsWith("/dashboard")) {
+    return null;
+  }
   return (
-    <footer className="bg-secondary/50 border-t border-border py-12 px-6 md:px-12">
-      <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-8">
+    <footer className="bg-secondary/50 border-t border-border py-12 px-6 md:px-12 xl:px-16 2xl:px-24">
+      <div className="max-w-[1920px] w-full mx-auto flex flex-col md:flex-row justify-between items-center gap-8">
         {/* Brand & Socials */}
         <div className="flex flex-col items-center md:items-start gap-4">
           <Link href="/" className="flex items-center gap-2">
