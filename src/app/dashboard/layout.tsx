@@ -32,6 +32,21 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
     }
   }, [isAuthenticated, isLoading, router]);
 
+  // 2. URL Obfuscation for Privacy
+  useEffect(() => {
+    if (isAuthenticated && !isLoading && pathname) {
+      try {
+        // Encode the current pathname to base64 to hide the word "dashboard"
+        const encodedPath = btoa(pathname);
+        // Replace the URL in the browser without triggering a Next.js navigation
+        window.history.replaceState(null, '', `/secure/${encodedPath}`);
+      } catch (e) {
+        // Fallback
+        window.history.replaceState(null, '', `/secure-session`);
+      }
+    }
+  }, [pathname, isAuthenticated, isLoading]);
+
   // Name initials generator for avatar
   const getInitials = (name: string) => {
     if (!name) return "U";
